@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expression Validator App</title>
+</head>
+
+<body>
+    <h2>Expression Validator App</h2>
+    <label for="expressionType">Select Expression Type:</label>
+    <select id="expressionType">
+        <option value="Email">Email</option>
+        <option value="Phone Number">Phone Number</option>
+        <option value="Post Code">Post Code</option>
+    </select>
+    <br><br>
+    <button onclick="validateExpression()">Validate</button>
+
+    <script>
+        function validateExpression() {
+            const expressionType = document.getElementById('expressionType').value;
+            let regex;
+
+            switch (expressionType) {
+                case 'Email':
+                    regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    break;
+                case 'Phone Number':
+                    regex = /^\d{11}$/;
+                    break;
+                case 'Post Code':
+                    regex = /^\d{4}$/;
+                    break;
+
+                default:
+                    alert('Invalid expression type!');
+                    return;
+            }
+
+            const userInput = prompt(`Enter ${expressionType}:`);
+
+            if (regex.test(userInput)) {
+                alert(`Valid ${expressionType}!`);
+            } else {
+                alert(`Invalid ${expressionType}!`);
+            }
+        }
+    </script>
+</body>
+
+</html>
